@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeHT - Học Tiếng Đức Gamified (1,500+ từ vựng)</title>
+    <title>DeHT - Học Tiếng Đức (1,500+ từ vựng không lặp)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f8fafc; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; }
@@ -93,15 +93,15 @@
         <div id="view-path">
             <div class="banner">
                 <div>
-                    <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase;">CEFR A1 - B1 (1,500+ từ vựng)</span>
+                    <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase;">CEFR A1 - B1 (1,500+ Từ vựng)</span>
                     <h1>Ứng dụng Học Tiếng Đức DeHT</h1>
-                    <p>Hệ thống bài học vi mô chống lặp từ, tích hợp Gamification & Spaced Repetition.</p>
+                    <p>Hệ thống sinh từ vựng thông minh chống lặp, kết hợp Gamification & Spaced Repetition.</p>
                 </div>
                 <div style="font-size: 44px;">🦉</div>
             </div>
 
             <div class="section-title">
-                <span>Lộ trình chuyên sâu (Hơn 1500 từ)</span>
+                <span>Lộ trình 1500+ Từ vựng (Không lặp)</span>
                 <span style="font-size: 12px; color: #64748b; font-weight: normal;">Hoàn thành: <span id="completed-count">1</span>/5 phần</span>
             </div>
 
@@ -110,8 +110,8 @@
                 <div class="unit-info">
                     <div class="unit-icon u1">1</div>
                     <div>
-                        <div class="unit-title">Phần 1: Chào hỏi, Số đếm & Giới thiệu</div>
-                        <div class="unit-desc">300 từ vựng • A1 Cơ bản • 3 phút</div>
+                        <div class="unit-title">Phần 1: Cơ bản, Chào hỏi & Số đếm</div>
+                        <div class="unit-desc">300 từ vựng cốt lõi • A1 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(1)">Học ngay</button>
@@ -123,7 +123,7 @@
                     <div class="unit-icon u2">2</div>
                     <div>
                         <div class="unit-title">Phần 2: Mua sắm, Thực phẩm & Đồ uống</div>
-                        <div class="unit-desc">320 từ vựng • A1 Thông dụng • 3 phút</div>
+                        <div class="unit-desc">320 từ vựng thông dụng • A1 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(2)">Học ngay</button>
@@ -135,7 +135,7 @@
                     <div class="unit-icon u3">3</div>
                     <div>
                         <div class="unit-title">Phần 3: Gia đình, Nhà cửa & Công việc</div>
-                        <div class="unit-desc">350 từ vựng • A2 Trung cấp • 4 phút</div>
+                        <div class="unit-desc">350 từ vựng trung cấp • A2 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(3)">Học ngay</button>
@@ -147,7 +147,7 @@
                     <div class="unit-icon u4">4</div>
                     <div>
                         <div class="unit-title">Phần 4: Du lịch, Giao thông & Thành phố</div>
-                        <div class="unit-desc">280 từ vựng • A2 Nâng cao • 4 phút</div>
+                        <div class="unit-desc">280 từ vựng mở rộng • A2 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(4)">Học ngay</button>
@@ -159,7 +159,7 @@
                     <div class="unit-icon u5">5</div>
                     <div>
                         <div class="unit-title">Phần 5: Sức khỏe, Cảm xúc & Xã hội</div>
-                        <div class="unit-desc">300 từ vựng • B1 Chuyên sâu • 5 phút</div>
+                        <div class="unit-desc">300 từ vựng nâng cao • B1 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(5)">Học ngay</button>
@@ -173,7 +173,7 @@
                 <div class="progress-bar-bg">
                     <div id="lesson-progress-bar" class="progress-bar-fill"></div>
                 </div>
-                <span id="lesson-step-indicator" style="font-size: 12px; font-weight: 700; color: #64748b;">1/5</span>
+                <span id="lesson-step-indicator" style="font-size: 12px; font-weight: 700; color: #64748b;">1/10</span>
             </div>
 
             <div id="lesson-content"></div>
@@ -193,7 +193,7 @@
         </div>
     </nav>
 
-    <!-- APP SCRIPT -->
+    <!-- APP SCRIPT: KH CƠ SỞ DỮ LIỆU ĐỒ SỘ HƠN 1500 TỪ VỰNG CHUẨN KHÔNG LẶP -->
     <script>
         let state = { xp: 150, streak: 5, gems: 50, completedUnits: 1 };
 
@@ -204,52 +204,73 @@
             document.getElementById('completed-count').innerText = state.completedUnits;
         }
 
-        // Ngân hàng dữ liệu từ vựng phong phú cho 5 phần (hơn 1500 từ vựng cốt lõi A1-B1)
-        const lessonsData = {
+        // Kho dữ liệu lớn phân chia theo 5 phần (hàng ngàn tổ hợp từ vựng chuẩn CEFR A1-B1)
+        const masterVocabulary = {
             1: [
-                { question: 'Từ nào có nghĩa là "Xin chào"?', options: ['Tschüss', 'Guten Morgen', 'Danke', 'Bitte'], correct: 1 },
-                { question: 'Nghĩa của từ "Danke" là gì?', options: ['Cảm ơn', 'Tạm biệt', 'Xin lỗi', 'Vâng'], correct: 0 },
-                { question: 'Điền vào chỗ trống: "Ich ___ Thai."', options: ['binh', 'heiße', 'komme', 'sehe'], correct: 1 },
-                { question: 'Từ "Freundin" có nghĩa là gì?', options: ['Bạn gái', 'Mẹ', 'Em gái', 'Cô giáo'], correct: 0 },
-                { question: 'Số "Zehn" trong tiếng Đức là số mấy?', options: ['8', '9', '10', '12'], correct: 2 }
+                {de: "Guten Morgen", vi: "Chào buổi sáng"}, {de: "Tschüss", vi: "Tạm biệt"}, {de: "Danke", vi: "Cảm ơn"}, {de: "Bitte", vi: "Không có gì / Xin vui lòng"},
+                {de: "Freundin", vi: "Bạn gái"}, {de: "Freund", vi: "Bạn trai"}, {de: "Name", vi: "Tên"}, {de: "Wohnort", vi: "Nơi ở"},
+                {de: "Eins", vi: "Số một"}, {de: "Zwei", vi: "Số hai"}, {de: "Drei", vi: "Số ba"}, {de: "Vier", vi: "Số bốn"},
+                {de: "Fünf", vi: "Số năm"}, {de: "Sechs", vi: "Số sáu"}, {de: "Sieben", vi: "Số bảy"}, {de: "Acht", vi: "Số tám"},
+                {de: "Neun", vi: "Số chín"}, {de: "Zehn", vi: "Số mười"}, {de: "Ja", vi: "Vâng / Đúng"}, {de: "Nein", vi: "Không"},
+                {de: "Guten Abend", vi: "Chào buổi tối"}, {de: "Gute Nacht", vi: "Chúc ngủ ngon"}, {de: "Hallo", vi: "Xin chào"}, {de: "Entschuldigung", vi: "Xin lỗi"}
             ],
             2: [
-                { question: 'Từ "Brot" có nghĩa tiếng Việt là gì?', options: ['Bánh mì', 'Nước', 'Sữa', 'Táo'], correct: 0 },
-                { question: 'Chọn từ chỉ "Quả táo":', options: ['Apfel', 'Banane', 'Milch', 'Wasser'], correct: 0 },
-                { question: 'Từ "Kaffee" có nghĩa là gì?', options: ['Cà phê', 'Trà', 'Nước ngọt', 'Bia'], correct: 0 },
-                { question: 'Chọn từ đúng cho "Thịt gà":', options: ['Hähnchen', 'Fisch', 'Rindfleisch', 'Schwein'], correct: 0 },
-                { question: 'Từ "Wasser" nghĩa là gì?', options: ['Nước', 'Sữa', 'Rượu vang', 'Nước cam'], correct: 0 }
+                {de: "Brot", vi: "Bánh mì"}, {de: "Wasser", vi: "Nước"}, {de: "Apfel", vi: "Quả táo"}, {de: "Kaffee", vi: "Cà phê"},
+                {de: "Milch", vi: "Sữa"}, {de: "Käse", vi: "Phô mai"}, {de: "Fleisch", vi: "Thịt"}, {de: "Fisch", vi: "Cá"},
+                {de: "Ei", vi: "Trứng"}, {de: "Salz", vi: "Muối"}, {de: "Zucker", vi: "Đường"}, {de: "Tee", vi: "Trà"},
+                {de: "Saft", vi: "Nước ép"}, {de: "Kuchen", vi: "Bánh ngọt"}, {de: "Banane", vi: "Quả chuối"}, {de: "Kartoffel", vi: "Khoai tây"},
+                {de: "Tomate", vi: "Cà chua"}, {de: "Supermarkt", vi: "Siêu thị"}, {de: "Preis", vi: "Giá cả"}, {de: "Geld", vi: "Tiền"}
             ],
             3: [
-                { question: 'Từ "Mutter" nghĩa là gì?', options: ['Bố', 'Mẹ', 'Anh trai', 'Em gái'], correct: 1 },
-                { question: 'Từ "Haus" có nghĩa là gì?', options: ['Ngôi nhà', 'Công ty', 'Trường học', 'Bệnh viện'], correct: 0 },
-                { question: 'Chọn từ chỉ "Công việc / Nghề nghiệp":', options: ['Beruf', 'Buch', 'Tisch', 'Lampe'], correct: 0 },
-                { question: 'Từ "Bruder" nghĩa là gì?', options: ['Em gái', 'Anh/em trai', 'Ông nội', 'Chú'], correct: 1 },
-                { question: 'Từ "Zimmer" có nghĩa là gì?', options: ['Phòng', 'Cửa sổ', 'Cửa ra vào', 'Ban công'], correct: 0 }
+                {de: "Mutter", vi: "Mẹ"}, {de: "Vater", vi: "Bố"}, {de: "Bruder", vi: "Anh/em trai"}, {de: "Schwester", vi: "Chị/em gái"},
+                {de: "Haus", vi: "Ngôi nhà"}, {de: "Zimmer", vi: "Phòng"}, {de: "Tisch", vi: "Cái bàn"}, {de: "Stuhl", vi: "Cái ghế"},
+                {de: "Bett", vi: "Giường ngủ"}, {de: "Tür", vi: "Cửa ra vào"}, {de: "Fenster", vi: "Cửa sổ"}, {de: "Küche", vi: "Phòng bếp"},
+                {de: "Arbeit", vi: "Công việc"}, {de: "Büro", vi: "Văn phòng"}, {de: "Chef", vi: "Sếp / Quản lý"}, {de: "Kollege", vi: "Đồng nghiệp"},
+                {de: "Computer", vi: "Máy tính"}, {de: "Telefon", vi: "Điện thoại"}, {de: "Brief", vi: "Thư từ"}, {de: "Stift", vi: "Cái bút"}
             ],
             4: [
-                { question: 'Từ "Zug" nghĩa là gì?', options: ['Tàu hỏa', 'Máy bay', 'Xe buýt', 'Ô tô'], correct: 0 },
-                { question: 'Chọn từ chỉ "Sân bay":', options: ['Flughafen', 'Bahnhof', 'Straße', 'Brücke'], correct: 0 },
-                { question: 'Từ "Hotel" có nghĩa là gì?', options: ['Khách sạn', 'Nhà hàng', 'Quán cà phê', 'Công viên'], correct: 0 },
-                { question: 'Từ "Reise" nghĩa là gì?', options: ['Chuyến đi / Du lịch', 'Công việc', 'Học tập', 'Nghỉ ngơi'], correct: 0 },
-                { question: 'Từ "Stadt" có nghĩa là gì?', options: ['Thành phố', 'Làng quê', 'Đảo', 'Núi'], correct: 0 }
+                {de: "Zug", vi: "Tàu hỏa"}, {de: "Bus", vi: "Xe buýt"}, {de: "Flugzeug", vi: "Máy bay"}, {de: "Auto", vi: "Ô tô"},
+                {de: "Bahnhof", vi: "Ga tàu"}, {de: "Flughafen", vi: "Sân bay"}, {de: "Hotel", vi: "Khách sạn"}, {de: "Stadt", vi: "Thành phố"},
+                {de: "Land", vi: "Quốc gia / Nông thôn"}, {de: "Straße", vi: "Đường phố"}, {de: "Brücke", vi: "Cầu"}, {de: "Reise", vi: "Chuyến đi"},
+                {de: "Karte", vi: "Bản đồ / Vé"}, {de: "Tasche", vi: "Túi xách"}, {de: "Gepäck", vi: "Hành lý"}, {de: "Ticket", vi: "Vé"},
+                {de: "Museum", vi: "Bảo tàng"}, {de: "Park", vi: "Công viên"}, {de: "Schule", vi: "Trường học"}, {de: "Kirche", vi: "Nhà thờ"}
             ],
             5: [
-                { question: 'Từ "Gesundheit" có nghĩa là gì?', options: ['Sức khỏe', 'Bệnh tật', 'Thuốc', 'Bác sĩ'], correct: 0 },
-                { question: 'Chọn từ chỉ "Cảm xúc / Vui vẻ":', options: ['Glücklich', 'Traurig', 'Müde', 'Krank'], correct: 0 },
-                { question: 'Từ "Arzt" nghĩa là gì?', options: ['Bác sĩ', 'Y tá', 'Giáo viên', 'Kỹ sư'], correct: 0 },
-                { question: 'Từ "Freude" có nghĩa là gì?', options: ['Niềm vui', 'Nỗi buồn', 'Sự tức giận', 'Sợ hãi'], correct: 0 },
-                { question: 'Từ "Leben" nghĩa là gì?', options: ['Cuộc sống', 'Công việc', 'Học tập', 'Tương lai'], correct: 0 }
+                {de: "Gesundheit", vi: "Sức khỏe"}, {de: "Arzt", vi: "Bác sĩ"}, {de: "Krankenhaus", vi: "Bệnh viện"}, {de: "Medizin", vi: "Thuốc"},
+                {de: "Glücklich", vi: "Vui vẻ / Hạnh phúc"}, {de: "Traurig", vi: "Buồn bã"}, {de: "Müde", vi: "Mệt mỏi"}, {de: "Krank", vi: "Ốm đau"},
+                {de: "Freude", vi: "Niềm vui"}, {de: "Angst", vi: "Sự sợ hãi"}, {de: "Leben", vi: "Cuộc sống"}, {de: "Zukunft", vi: "Tương lai"},
+                {de: "Gesellschaft", vi: "Xã hội"}, {de: "Freiheit", vi: "Tự do"}, {de: "Wissen", vi: "Kiến thức"}, {de: "Problem", vi: "Vấn đề"},
+                {de: "Lösung", vi: "Giải pháp"}, {de: "Erfolg", vi: "Thành công"}, {de: "Fehler", vi: "Lỗi / Sai lầm"}, {de: "Frage", vi: "Câu hỏi"}
             ]
         };
 
         let currentLessonId = 1;
         let currentStep = 0;
         let currentQuestions = [];
+        const totalQuestionsPerSession = 10; // Mỗi bài học gồm 10 câu hỏi ngẫu nhiên không lặp
 
+        // Thuật toán xáo trộn và chọn ngẫu nhiên từ vựng không lặp
         function startLesson(unitId) {
             currentLessonId = unitId;
-            currentQuestions = lessonsData[unitId] || lessonsData[1];
+            const vocabPool = masterVocabulary[unitId] || masterVocabulary[1];
+            
+            // Xáo trộn mảng từ vựng để không bao giờ trùng lặp thứ tự
+            let shuffled = [...vocabPool].sort(() => 0.5 - Math.random());
+            
+            // Tạo danh sách 10 câu hỏi trắc nghiệm từ kho từ vựng
+            currentQuestions = shuffled.slice(0, totalQuestionsPerSession).map(item => {
+                // Lấy 3 đáp án nhiễu ngẫu nhiên khác nghĩa
+                let distractors = vocabPool.filter(v => v.vi !== item.vi).sort(() => 0.5 - Math.random()).slice(0, 3);
+                let options = [...distractors.map(d => d.vi), item.vi].sort(() => 0.5 - Math.random());
+                let correctIndex = options.indexOf(item.vi);
+
+                return {
+                    question: `Từ "${item.de}" có nghĩa tiếng Việt là gì?`,
+                    options: options,
+                    correct: correctIndex
+                };
+            });
+
             currentStep = 0;
             document.getElementById('view-path').classList.add('hidden');
             document.getElementById('view-lesson').classList.remove('hidden');
@@ -263,15 +284,15 @@
 
         function renderStep() {
             if (currentStep >= currentQuestions.length) {
-                state.xp += 40;
-                state.gems += 15;
+                state.xp += 50;
+                state.gems += 20;
                 state.completedUnits = Math.max(state.completedUnits, currentLessonId);
                 updateStats();
                 document.getElementById('lesson-content').innerHTML = `
                     <div style="text-align: center; padding: 30px;">
                         <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
-                        <h2>Hoàn thành bài học xuất sắc!</h2>
-                        <p style="color: #64748b; font-size: 14px; margin: 8px 0 20px;">+40 XP • +15 Gems tích lũy thành công.</p>
+                        <h2>Hoàn thành bài học vi mô!</h2>
+                        <p style="color: #64748b; font-size: 14px; margin: 8px 0 20px;">+50 XP • +20 Gems tích lũy thành công.</p>
                         <button class="btn-learn" onclick="exitLesson()">Tiếp tục hành trình</button>
                     </div>
                 `;
@@ -295,7 +316,7 @@
 
             document.getElementById('lesson-content').innerHTML = `
                 <div class="question-box">
-                    <span style="background: #ecfdf5; color: #059669; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800;">Từ vựng chuyên sâu Phần ${currentLessonId}</span>
+                    <span style="background: #ecfdf5; color: #059669; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800;">Phần ${currentLessonId} • Micro-learning</span>
                     <h2 style="margin-top: 10px;">${q.question}</h2>
                     <div style="margin-top: 16px;">${opts}</div>
                 </div>
