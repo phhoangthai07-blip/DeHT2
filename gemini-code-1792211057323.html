@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeHT - Học Tiếng Đức Gamified</title>
+    <!-- Internal CSS Styling -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
+        .nav-container { max-width: 800px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-box { width: 40px; height: 40px; background: #10b981; color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; }
+        .logo-title { font-size: 20px; font-weight: 900; color: #334155; letter-spacing: 0.5px; }
+
+        .stats-bar { display: flex; align-items: center; gap: 15px; }
+        .stat-item { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 20px; border: 1px solid; }
+        .streak { color: #f59e0b; background: #fffbeb; border-color: #fde68a; }
+        .gems { color: #0ea5e9; background: #f0f9ff; border-color: #bae6fd; }
+        .xp { color: #6366f1; background: #eef2ff; border-color: #c7d2fe; }
+
+        .auth-btn { background: #059669; color: white; border: none; font-weight: 700; padding: 8px 16px; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
+        .auth-btn:hover { background: #047857; }
+
+        main { flex: 1; max-width: 800px; width: 100%; margin: 0 auto; padding: 20px; padding-bottom: 90px; }
+
+        .banner { background: linear-gradient(135deg, #10b981, #0d9488); border-radius: 24px; padding: 24px; color: white; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+        .banner h1 { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+        .banner p { font-size: 14px; opacity: 0.9; }
+
+        .section-title { font-size: 18px; font-weight: 900; color: #334155; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .unit-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.2s; }
+        .unit-card:hover { border-color: #34d399; }
+        .unit-info { display: flex; align-items: center; gap: 16px; }
+        .unit-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; }
+        .u1 { background: #d1fae5; color: #059669; }
+        .u2 { background: #fef3c7; color: #d97706; }
+        .u3 { background: #e0f2fe; color: #0284c7; }
+
+        .unit-title { font-weight: 700; font-size: 16px; color: #1e293b; margin-bottom: 4px; }
+        .unit-desc { font-size: 12px; color: #64748b; }
+
+        .btn-learn { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .btn-learn:hover { background: #059669; }
+
+        /* Lesson Screen */
+        .lesson-container { background: white; border-radius: 24px; padding: 24px; border: 1px solid #e2e8f0; max-width: 600px; margin: 0 auto; }
+        .lesson-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .progress-bar-bg { flex: 1; margin: 0 16px; height: 10px; background: #f1f5f9; border-radius: 5px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: #10b981; width: 25%; transition: width 0.3s; }
+        
+        .question-box h2 { font-size: 20px; font-weight: 900; color: #1e293b; margin-bottom: 16px; }
+        .option-label { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 14px; margin-bottom: 12px; cursor: pointer; background: #fafafa; font-weight: 700; color: #334155; }
+        .option-label:hover { border-color: #34d399; background: #f0fdf4; }
+
+        .lesson-footer { margin-top: 24px; border-top: 1px solid #f1f5f9; padding-top: 16px; display: flex; justify-content: flex-end; }
+        
+        /* Bottom Nav */
+        nav.bottom-nav { background: white; border-top: 1px solid #e2e8f0; position: fixed; bottom: 0; left: 0; right: 0; }
+        .nav-items { max-width: 400px; margin: 0 auto; display: flex; justify-content: space-around; padding: 10px; }
+        .nav-item { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: #64748b; cursor: pointer; }
+        .nav-item.active { color: #10b981; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAVIGATION -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-box">De</div>
+                <span class="logo-title">DeHT</span>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item streak">🔥 <span id="stat-streak">5</span></div>
+                <div class="stat-item gems">💎 <span id="stat-gems">50</span></div>
+                <div class="stat-item xp">⚡ <span id="stat-xp">150</span></div>
+                <button id="auth-btn" class="auth-btn" onclick="openAuthModal()">Đăng nhập</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main>
+        <!-- HOME / PATH VIEW -->
+        <div id="view-path">
+            <div class="banner">
+                <div>
+                    <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase;">CEFR A1 - B1</span>
+                    <h1>Ứng dụng Học Tiếng Đức DeHT</h1>
+                    <p>Hơn 1.500 từ vựng cốt lõi với phương pháp Gamification và Spaced Repetition.</p>
+                </div>
+                <div style="font-size: 48px;">🦉</div>
+            </div>
+
+            <div class="section-title">
+                <span>Lộ trình bài học vi mô</span>
+                <span style="font-size: 12px; color: #64748b; font-weight: normal;">Hoàn thành: <span id="completed-count">1</span>/3 phần</span>
+            </div>
+
+            <!-- Unit 1 -->
+            <div class="unit-card">
+                <div class="unit-info">
+                    <div class="unit-icon u1">1</div>
+                    <div>
+                        <div class="unit-title">Phần 1: Chào hỏi & Giới thiệu cơ bản</div>
+                        <div class="unit-desc">300 từ vựng • A1 Cơ bản • 3 phút</div>
+                    </div>
+                </div>
+                <button class="btn-learn" onclick="startLesson(1)">Học ngay</button>
+            </div>
+
+            <!-- Unit 2 -->
+            <div class="unit-card">
+                <div class="unit-info">
+                    <div class="unit-icon u2">2</div>
+                    <div>
+                        <div class="unit-title">Phần 2: Mua sắm & Thực phẩm hàng ngày</div>
+                        <div class="unit-desc">350 từ vựng • A1 Thông dụng • 3 phút</div>
+                    </div>
+                </div>
+                <button class="btn-learn" onclick="startLesson(2)">Học ngay</button>
+            </div>
+
+            <!-- Unit 3 -->
+            <div class="unit-card">
+                <div class="unit-info">
+                    <div class="unit-icon u3">3</div>
+                    <div>
+                        <div class="unit-title">Phần 3: Gia đình, Công việc & Cuộc sống</div>
+                        <div class="unit-desc">400 từ vựng • A2 Trung cấp • 4 phút</div>
+                    </div>
+                </div>
+                <button class="btn-learn" onclick="startLesson(3)">Học ngay</button>
+            </div>
+        </div>
+
+        <!-- LESSON VIEW -->
+        <div id="view-lesson" class="lesson-container hidden">
+            <div class="lesson-header">
+                <button onclick="exitLesson()" style="background:none; border:none; font-weight:700; color:#64748b; cursor:pointer;">✕ Thoát</button>
+                <div class="progress-bar-bg">
+                    <div id="lesson-progress-bar" class="progress-bar-fill"></div>
+                </div>
+                <span id="lesson-step-indicator" style="font-size: 12px; font-weight: 700; color: #64748b;">1/4</span>
+            </div>
+
+            <div id="lesson-content">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="lesson-footer">
+                <button id="check-btn" onclick="checkAnswer()" class="btn-learn">Kiểm tra</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+        <div class="nav-items">
+            <button class="nav-item active" onclick="switchTab('path')">🏠 <span>Học</span></button>
+            <button class="nav-item" onclick="switchTab('practice')">🏋️ <span>Ôn tập</span></button>
+            <button class="nav-item" onclick="switchTab('leaderboard')">🏆 <span>Xếp hạng</span></button>
+        </div>
+    </nav>
+
+    <!-- APP SCRIPT -->
+    <script>
+        let state = { xp: 150, streak: 5, gems: 50, completedUnits: 1 };
+
+        function updateStats() {
+            document.getElementById('stat-xp').innerText = state.xp;
+            document.getElementById('stat-streak').innerText = state.streak;
+            document.getElementById('stat-gems').innerText = state.gems;
+            document.getElementById('completed-count').innerText = state.completedUnits;
+        }
+
+        const lessonsData = {
+            1: [
+                { question: 'Từ nào sau đây có nghĩa là "Xin chào"?', options: ['Tschüss', 'Guten Morgen', 'Danke', 'Bitte'], correct: 1 },
+                { question: 'Chọn nghĩa đúng của từ: "Danke"', options: ['Cảm ơn', 'Tạm biệt', 'Xin lỗi', 'Vâng'], correct: 0 },
+                { question: 'Điền từ thích hợp: "Ich ___ Thai." (Tôi tên là Thai)', options: ['binh', 'heiße', 'komme', 'sehe'], correct: 1 },
+                { question: 'Tschüss có nghĩa là gì?', options: ['Chào buổi sáng', 'Tạm biệt', 'Hẹn gặp lại', 'Xin chào'], correct: 1 }
+            ],
+            2: [
+                { question: 'Từ "Brot" có nghĩa tiếng Việt là gì?', options: ['Bánh mì', 'Nước', 'Sữa', 'Táo'], correct: 0 },
+                { question: 'Chọn từ chỉ "Quả táo" trong tiếng Đức:', options: ['Apfel', 'Banane', 'Milch', 'Wasser'], correct: 0 }
+            ],
+            3: [
+                { question: 'Từ "Mutter" nghĩa là gì?', options: ['Bố', 'Mẹ', 'Anh trai', 'Em gái'], correct: 1 }
+            ]
+        };
+
+        let currentLessonId = 1;
+        let currentStep = 0;
+        let currentQuestions = [];
+
+        function startLesson(unitId) {
+            currentLessonId = unitId;
+            currentQuestions = lessonsData[unitId] || lessonsData[1];
+            currentStep = 0;
+            document.getElementById('view-path').classList.add('hidden');
+            document.getElementById('view-lesson').classList.remove('hidden');
+            renderStep();
+        }
+
+        function exitLesson() {
+            document.getElementById('view-lesson').classList.add('hidden');
+            document.getElementById('view-path').classList.remove('hidden');
+        }
+
+        function renderStep() {
+            if (currentStep >= currentQuestions.length) {
+                state.xp += 30;
+                state.gems += 10;
+                state.completedUnits = Math.max(state.completedUnits, currentLessonId);
+                updateStats();
+                document.getElementById('lesson-content').innerHTML = `
+                    <div style="text-align: center; padding: 30px;">
+                        <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+                        <h2>Hoàn thành bài học!</h2>
+                        <p style="color: #64748b; font-size: 14px; margin: 8px 0 20px;">+30 XP • +10 Gems tích lũy thành công.</p>
+                        <button class="btn-learn" onclick="exitLesson()">Tiếp tục hành trình</button>
+                    </div>
+                `;
+                document.getElementById('lesson-footer').style.display = 'none';
+                return;
+            }
+
+            const q = currentQuestions[currentStep];
+            document.getElementById('lesson-progress-bar').style.width = ((currentStep) / currentQuestions.length) * 100 + '%';
+            document.getElementById('lesson-step-indicator').innerText = (currentStep + 1) + '/' + currentQuestions.length;
+            document.getElementById('lesson-footer').style.display = 'flex';
+
+            let opts = '';
+            q.options.forEach((opt, idx) => {
+                opts += `
+                    <label class="option-label">
+                        <input type="radio" name="opt" value="${idx}"> ${opt}
+                    </label>
+                `;
+            });
+
+            document.getElementById('lesson-content').innerHTML = `
+                <div class="question-box">
+                    <span style="background: #ecfdf5; color: #059669; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800;">Từ vựng & Phát âm</span>
+                    <h2 style="margin-top: 10px;">${q.question}</h2>
+                    <div style="margin-top: 16px;">${opts}</div>
+                </div>
+            `;
+        }
+
+        function checkAnswer() {
+            const selected = document.querySelector('input[name="opt"]:checked');
+            if (!selected) { alert('Vui lòng chọn một đáp án!'); return; }
+            if (parseInt(selected.value) === currentQuestions[currentStep].correct) {
+                currentStep++;
+                renderStep();
+            } else {
+                alert('Chưa chính xác, hãy thử lại nhé!');
+            }
+        }
+
+        function switchTab(tab) {
+            if(tab === 'path') exitLesson();
+            else if(tab === 'practice') alert('Tính năng Spaced Repetition (Ôn tập thông minh) đang kích hoạt.');
+            else if(tab === 'leaderboard') alert('Bảng xếp hạng toàn cầu đang cập nhật!');
+        }
+
+        function openAuthModal() {
+            const email = prompt("Nhập email của bạn để đăng nhập với Supabase:");
+            if(email) {
+                alert("Đã gửi Magic Link xác thực đến " + email);
+                document.getElementById('auth-btn').innerText = "Đã kết nối";
+            }
+        }
+
+        updateStats();
+    </script>
+</body>
+</html>
