@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeHT - Học Tiếng Đức (1,500+ từ vựng không lặp)</title>
+    <title>DeHT - Học Tiếng Đức Gamified</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f8fafc; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; }
@@ -55,8 +55,12 @@
         
         .question-box { margin-bottom: 20px; }
         .question-box h2 { font-size: 18px; font-weight: 900; color: #1e293b; margin-bottom: 16px; }
-        .option-label { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 14px; margin-bottom: 10px; cursor: pointer; background: #fafafa; font-weight: 700; color: #334155; font-size: 14px; }
+        .option-label { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 14px; margin-bottom: 10px; cursor: pointer; background: #fafafa; font-weight: 700; color: #334155; font-size: 14px; transition: all 0.2s; }
         .option-label:hover { border-color: #34d399; background: #f0fdf4; }
+        
+        /* Trạng thái đúng/sai trực quan */
+        .option-label.correct { border-color: #10b981 !important; background: #ecfdf5 !important; color: #065f46; }
+        .option-label.incorrect { border-color: #ef4444 !important; background: #fef2f2 !important; color: #991b1b; }
 
         .lesson-footer { margin-top: 24px; border-top: 1px solid #f1f5f9; padding-top: 16px; display: flex; justify-content: flex-end; }
         
@@ -93,15 +97,15 @@
         <div id="view-path">
             <div class="banner">
                 <div>
-                    <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase;">CEFR A1 - B1 (1,500+ Từ vựng)</span>
+                    <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase;">CEFR A1 - B1 (Kho từ vựng mở rộng)</span>
                     <h1>Ứng dụng Học Tiếng Đức DeHT</h1>
-                    <p>Hệ thống sinh từ vựng thông minh chống lặp, kết hợp Gamification & Spaced Repetition.</p>
+                    <p>Hệ thống học thông minh chống lặp câu hỏi, phản hồi màu sắc trực quan.</p>
                 </div>
                 <div style="font-size: 44px;">🦉</div>
             </div>
 
             <div class="section-title">
-                <span>Lộ trình 1500+ Từ vựng (Không lặp)</span>
+                <span>Lộ trình bài học chuyên sâu</span>
                 <span style="font-size: 12px; color: #64748b; font-weight: normal;">Hoàn thành: <span id="completed-count">1</span>/5 phần</span>
             </div>
 
@@ -111,7 +115,7 @@
                     <div class="unit-icon u1">1</div>
                     <div>
                         <div class="unit-title">Phần 1: Cơ bản, Chào hỏi & Số đếm</div>
-                        <div class="unit-desc">300 từ vựng cốt lõi • A1 • Micro-learning</div>
+                        <div class="unit-desc">Từ vựng cốt lõi • A1 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(1)">Học ngay</button>
@@ -123,7 +127,7 @@
                     <div class="unit-icon u2">2</div>
                     <div>
                         <div class="unit-title">Phần 2: Mua sắm, Thực phẩm & Đồ uống</div>
-                        <div class="unit-desc">320 từ vựng thông dụng • A1 • Micro-learning</div>
+                        <div class="unit-desc">Từ vựng thông dụng • A1 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(2)">Học ngay</button>
@@ -135,7 +139,7 @@
                     <div class="unit-icon u3">3</div>
                     <div>
                         <div class="unit-title">Phần 3: Gia đình, Nhà cửa & Công việc</div>
-                        <div class="unit-desc">350 từ vựng trung cấp • A2 • Micro-learning</div>
+                        <div class="unit-desc">Từ vựng trung cấp • A2 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(3)">Học ngay</button>
@@ -147,7 +151,7 @@
                     <div class="unit-icon u4">4</div>
                     <div>
                         <div class="unit-title">Phần 4: Du lịch, Giao thông & Thành phố</div>
-                        <div class="unit-desc">280 từ vựng mở rộng • A2 • Micro-learning</div>
+                        <div class="unit-desc">Từ vựng mở rộng • A2 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(4)">Học ngay</button>
@@ -159,7 +163,7 @@
                     <div class="unit-icon u5">5</div>
                     <div>
                         <div class="unit-title">Phần 5: Sức khỏe, Cảm xúc & Xã hội</div>
-                        <div class="unit-desc">300 từ vựng nâng cao • B1 • Micro-learning</div>
+                        <div class="unit-desc">Từ vựng nâng cao • B1 • Micro-learning</div>
                     </div>
                 </div>
                 <button class="btn-learn" onclick="startLesson(5)">Học ngay</button>
@@ -193,7 +197,7 @@
         </div>
     </nav>
 
-    <!-- APP SCRIPT: KH CƠ SỞ DỮ LIỆU ĐỒ SỘ HƠN 1500 TỪ VỰNG CHUẨN KHÔNG LẶP -->
+    <!-- APP SCRIPT -->
     <script>
         let state = { xp: 150, streak: 5, gems: 50, completedUnits: 1 };
 
@@ -204,62 +208,66 @@
             document.getElementById('completed-count').innerText = state.completedUnits;
         }
 
-        // Kho dữ liệu lớn phân chia theo 5 phần (hàng ngàn tổ hợp từ vựng chuẩn CEFR A1-B1)
+        // Cơ sở dữ liệu phong phú các từ vựng chuẩn CEFR A1-B1 theo từng phần
         const masterVocabulary = {
             1: [
-                {de: "Guten Morgen", vi: "Chào buổi sáng"}, {de: "Tschüss", vi: "Tạm biệt"}, {de: "Danke", vi: "Cảm ơn"}, {de: "Bitte", vi: "Không có gì / Xin vui lòng"},
+                {de: "Guten Morgen", vi: "Chào buổi sáng"}, {de: "Tschüss", vi: "Tạm biệt"}, {de: "Danke", vi: "Cảm ơn"}, {de: "Bitte", vi: "Không có gì"},
                 {de: "Freundin", vi: "Bạn gái"}, {de: "Freund", vi: "Bạn trai"}, {de: "Name", vi: "Tên"}, {de: "Wohnort", vi: "Nơi ở"},
                 {de: "Eins", vi: "Số một"}, {de: "Zwei", vi: "Số hai"}, {de: "Drei", vi: "Số ba"}, {de: "Vier", vi: "Số bốn"},
                 {de: "Fünf", vi: "Số năm"}, {de: "Sechs", vi: "Số sáu"}, {de: "Sieben", vi: "Số bảy"}, {de: "Acht", vi: "Số tám"},
-                {de: "Neun", vi: "Số chín"}, {de: "Zehn", vi: "Số mười"}, {de: "Ja", vi: "Vâng / Đúng"}, {de: "Nein", vi: "Không"},
-                {de: "Guten Abend", vi: "Chào buổi tối"}, {de: "Gute Nacht", vi: "Chúc ngủ ngon"}, {de: "Hallo", vi: "Xin chào"}, {de: "Entschuldigung", vi: "Xin lỗi"}
+                {de: "Neun", vi: "Số chín"}, {de: "Zehn", vi: "Số mười"}, {de: "Ja", vi: "Vâng"}, {de: "Nein", vi: "Không"},
+                {de: "Guten Abend", vi: "Chào buổi tối"}, {de: "Gute Nacht", vi: "Chúc ngủ ngon"}, {de: "Hallo", vi: "Xin chào"}, {de: "Entschuldigung", vi: "Xin lỗi"},
+                {de: "sprechen", vi: "Nói"}, {de: "lernen", vi: "Học tập"}, {de: "kommen", vi: "Đến từ"}, {de: "wohnen", vi: "Sinh sống"}
             ],
             2: [
                 {de: "Brot", vi: "Bánh mì"}, {de: "Wasser", vi: "Nước"}, {de: "Apfel", vi: "Quả táo"}, {de: "Kaffee", vi: "Cà phê"},
                 {de: "Milch", vi: "Sữa"}, {de: "Käse", vi: "Phô mai"}, {de: "Fleisch", vi: "Thịt"}, {de: "Fisch", vi: "Cá"},
                 {de: "Ei", vi: "Trứng"}, {de: "Salz", vi: "Muối"}, {de: "Zucker", vi: "Đường"}, {de: "Tee", vi: "Trà"},
                 {de: "Saft", vi: "Nước ép"}, {de: "Kuchen", vi: "Bánh ngọt"}, {de: "Banane", vi: "Quả chuối"}, {de: "Kartoffel", vi: "Khoai tây"},
-                {de: "Tomate", vi: "Cà chua"}, {de: "Supermarkt", vi: "Siêu thị"}, {de: "Preis", vi: "Giá cả"}, {de: "Geld", vi: "Tiền"}
+                {de: "Tomate", vi: "Cà chua"}, {de: "Supermarkt", vi: "Siêu thị"}, {de: "Preis", vi: "Giá cả"}, {de: "Geld", vi: "Tiền"},
+                {de: "essen", vi: "Ăn"}, {de: "trinken", vi: "Uống"}, {de: "kaufen", vi: "Mua"}, {de: "bezahlen", vi: "Thanh toán"}
             ],
             3: [
                 {de: "Mutter", vi: "Mẹ"}, {de: "Vater", vi: "Bố"}, {de: "Bruder", vi: "Anh/em trai"}, {de: "Schwester", vi: "Chị/em gái"},
                 {de: "Haus", vi: "Ngôi nhà"}, {de: "Zimmer", vi: "Phòng"}, {de: "Tisch", vi: "Cái bàn"}, {de: "Stuhl", vi: "Cái ghế"},
                 {de: "Bett", vi: "Giường ngủ"}, {de: "Tür", vi: "Cửa ra vào"}, {de: "Fenster", vi: "Cửa sổ"}, {de: "Küche", vi: "Phòng bếp"},
-                {de: "Arbeit", vi: "Công việc"}, {de: "Büro", vi: "Văn phòng"}, {de: "Chef", vi: "Sếp / Quản lý"}, {de: "Kollege", vi: "Đồng nghiệp"},
-                {de: "Computer", vi: "Máy tính"}, {de: "Telefon", vi: "Điện thoại"}, {de: "Brief", vi: "Thư từ"}, {de: "Stift", vi: "Cái bút"}
+                {de: "Arbeit", vi: "Công việc"}, {de: "Büro", vi: "Văn phòng"}, {de: "Chef", vi: "Quản lý"}, {de: "Kollege", vi: "Đồng nghiệp"},
+                {de: "Computer", vi: "Máy tính"}, {de: "Telefon", vi: "Điện thoại"}, {de: "Brief", vi: "Thư từ"}, {de: "Stift", vi: "Cái bút"},
+                {de: "arbeiten", vi: "Làm việc"}, {de: "schlafen", vi: "Ngủ"}, {de: "kochen", vi: "Nấu ăn"}, {de: "lesen", vi: "Đọc sách"}
             ],
             4: [
                 {de: "Zug", vi: "Tàu hỏa"}, {de: "Bus", vi: "Xe buýt"}, {de: "Flugzeug", vi: "Máy bay"}, {de: "Auto", vi: "Ô tô"},
                 {de: "Bahnhof", vi: "Ga tàu"}, {de: "Flughafen", vi: "Sân bay"}, {de: "Hotel", vi: "Khách sạn"}, {de: "Stadt", vi: "Thành phố"},
-                {de: "Land", vi: "Quốc gia / Nông thôn"}, {de: "Straße", vi: "Đường phố"}, {de: "Brücke", vi: "Cầu"}, {de: "Reise", vi: "Chuyến đi"},
-                {de: "Karte", vi: "Bản đồ / Vé"}, {de: "Tasche", vi: "Túi xách"}, {de: "Gepäck", vi: "Hành lý"}, {de: "Ticket", vi: "Vé"},
-                {de: "Museum", vi: "Bảo tàng"}, {de: "Park", vi: "Công viên"}, {de: "Schule", vi: "Trường học"}, {de: "Kirche", vi: "Nhà thờ"}
+                {de: "Land", vi: "Quốc gia"}, {de: "Straße", vi: "Đường phố"}, {de: "Brücke", vi: "Cầu"}, {de: "Reise", vi: "Chuyến đi"},
+                {de: "Karte", vi: "Bản đồ"}, {de: "Tasche", vi: "Túi xách"}, {de: "Gepäck", vi: "Hành lý"}, {de: "Ticket", vi: "Vé"},
+                {de: "Museum", vi: "Bảo tàng"}, {de: "Park", vi: "Công viên"}, {de: "Schule", vi: "Trường học"}, {de: "Kirche", vi: "Nhà thờ"},
+                {de: "reisen", vi: "Du lịch"}, {de: "fahren", vi: "Lái xe/Đi xe"}, {de: "fliegen", vi: "Bay"}, {de: "besuchen", vi: "Thăm quan"}
             ],
             5: [
                 {de: "Gesundheit", vi: "Sức khỏe"}, {de: "Arzt", vi: "Bác sĩ"}, {de: "Krankenhaus", vi: "Bệnh viện"}, {de: "Medizin", vi: "Thuốc"},
-                {de: "Glücklich", vi: "Vui vẻ / Hạnh phúc"}, {de: "Traurig", vi: "Buồn bã"}, {de: "Müde", vi: "Mệt mỏi"}, {de: "Krank", vi: "Ốm đau"},
-                {de: "Freude", vi: "Niềm vui"}, {de: "Angst", vi: "Sự sợ hãi"}, {de: "Leben", vi: "Cuộc sống"}, {de: "Zukunft", vi: "Tương lai"},
+                {de: "Glücklich", vi: "Hạnh phúc"}, {de: "Traurig", vi: "Buồn bã"}, {de: "Müde", vi: "Mệt mỏi"}, {de: "Krank", vi: "Ốm đau"},
+                {de: "Freude", vi: "Niềm vui"}, {de: "Angst", vi: "Sợ hãi"}, {de: "Leben", vi: "Cuộc sống"}, {de: "Zukunft", vi: "Tương lai"},
                 {de: "Gesellschaft", vi: "Xã hội"}, {de: "Freiheit", vi: "Tự do"}, {de: "Wissen", vi: "Kiến thức"}, {de: "Problem", vi: "Vấn đề"},
-                {de: "Lösung", vi: "Giải pháp"}, {de: "Erfolg", vi: "Thành công"}, {de: "Fehler", vi: "Lỗi / Sai lầm"}, {de: "Frage", vi: "Câu hỏi"}
+                {de: "Lösung", vi: "Giải pháp"}, {de: "Erfolg", vi: "Thành công"}, {de: "Fehler", vi: "Lỗi sai"}, {de: "Frage", vi: "Câu hỏi"},
+                {de: "helfen", vi: "Giúp đỡ"}, {de: "verstehen", vi: "Hiểu"}, {de: "denken", vi: "Suy nghĩ"}, {de: "fühlen", vi: "Cảm thấy"}
             ]
         };
 
         let currentLessonId = 1;
         let currentStep = 0;
         let currentQuestions = [];
-        const totalQuestionsPerSession = 10; // Mỗi bài học gồm 10 câu hỏi ngẫu nhiên không lặp
+        const totalQuestionsPerSession = 10;
 
-        // Thuật toán xáo trộn và chọn ngẫu nhiên từ vựng không lặp
+        // Bắt đầu bài học với danh sách câu hỏi duy nhất, hoàn toàn không lặp
         function startLesson(unitId) {
             currentLessonId = unitId;
             const vocabPool = masterVocabulary[unitId] || masterVocabulary[1];
             
-            // Xáo trộn mảng từ vựng để không bao giờ trùng lặp thứ tự
-            let shuffled = [...vocabPool].sort(() => 0.5 - Math.random());
-            
-            // Tạo danh sách 10 câu hỏi trắc nghiệm từ kho từ vựng
-            currentQuestions = shuffled.slice(0, totalQuestionsPerSession).map(item => {
-                // Lấy 3 đáp án nhiễu ngẫu nhiên khác nghĩa
+            // Xáo trộn kho từ vựng và chọn ra 10 từ duy nhất cho phiên học này
+            let shuffledPool = [...vocabPool].sort(() => 0.5 - Math.random());
+            let selectedWords = shuffledPool.slice(0, totalQuestionsPerSession);
+
+            currentQuestions = selectedWords.map(item => {
                 let distractors = vocabPool.filter(v => v.vi !== item.vi).sort(() => 0.5 - Math.random()).slice(0, 3);
                 let options = [...distractors.map(d => d.vi), item.vi].sort(() => 0.5 - Math.random());
                 let correctIndex = options.indexOf(item.vi);
@@ -291,7 +299,7 @@
                 document.getElementById('lesson-content').innerHTML = `
                     <div style="text-align: center; padding: 30px;">
                         <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
-                        <h2>Hoàn thành bài học vi mô!</h2>
+                        <h2>Hoàn thành bài học xuất sắc!</h2>
                         <p style="color: #64748b; font-size: 14px; margin: 8px 0 20px;">+50 XP • +20 Gems tích lũy thành công.</p>
                         <button class="btn-learn" onclick="exitLesson()">Tiếp tục hành trình</button>
                     </div>
@@ -308,8 +316,8 @@
             let opts = '';
             q.options.forEach((opt, idx) => {
                 opts += `
-                    <label class="option-label">
-                        <input type="radio" name="opt" value="${idx}"> <span>${opt}</span>
+                    <label class="option-label" id="opt-label-${idx}" onclick="selectOption(${idx})">
+                        <input type="radio" name="opt" value="${idx}" style="display:none;"> <span>${opt}</span>
                     </label>
                 `;
             });
@@ -323,14 +331,35 @@
             `;
         }
 
+        function selectOption(idx) {
+            // Xóa hiệu ứng cũ của các lựa chọn khác
+            document.querySelectorAll('.option-label').forEach(el => {
+                el.classList.remove('correct', 'incorrect');
+            });
+            // Đánh dấu input radio tương ứng
+            const radio = document.querySelector(`input[value="${idx}"]`);
+            if(radio) radio.checked = true;
+        }
+
+        // Kiểm tra đáp án: Sai hiện màu đỏ, đúng chuyển câu hỏi mượt mà không dùng alert phiền phức
         function checkAnswer() {
             const selected = document.querySelector('input[name="opt"]:checked');
-            if (!selected) { alert('Vui lòng chọn một đáp án!'); return; }
-            if (parseInt(selected.value) === currentQuestions[currentStep].correct) {
-                currentStep++;
-                renderStep();
+            if (!selected) return;
+
+            const selectedIdx = parseInt(selected.value);
+            const correctIdx = currentQuestions[currentStep].correct;
+            const selectedLabel = document.getElementById(`opt-label-${selectedIdx}`);
+            const correctLabel = document.getElementById(`opt-label-${correctIdx}`);
+
+            if (selectedIdx === correctIdx) {
+                selectedLabel.classList.add('correct');
+                setTimeout(() => {
+                    currentStep++;
+                    renderStep();
+                }, 400); // Chờ hiệu ứng xanh nhẹ rồi chuyển câu tiếp theo
             } else {
-                alert('Chưa chính xác, hãy thử lại nhé!');
+                selectedLabel.classList.add('incorrect');
+                correctLabel.classList.add('correct'); // Gợi ý đáp án đúng bằng màu xanh
             }
         }
 
