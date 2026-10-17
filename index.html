@@ -15,7 +15,7 @@
         .logo-box { width: 40px; height: 40px; background: #10b981; color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; }
         .logo-title { font-size: 20px; font-weight: 900; color: #334155; letter-spacing: 0.5px; }
 
-        .stats-bar { display: flex; align-items: center; gap: 15px; }
+        .stats-bar { display: flex; align-items: center; gap: 12px; }
         .stat-item { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 20px; border: 1px solid; }
         .streak { color: #f59e0b; background: #fffbeb; border-color: #fde68a; }
         .gems { color: #0ea5e9; background: #f0f9ff; border-color: #bae6fd; }
@@ -47,11 +47,12 @@
         .btn-learn:hover { background: #059669; }
 
         /* Lesson Screen */
-        .lesson-container { background: white; border-radius: 24px; padding: 24px; border: 1px solid #e2e8f0; max-width: 600px; margin: 0 auto; }
+        .lesson-container { background: white; border-radius: 24px; padding: 24px; border: 1px solid #e2e8f0; max-width: 600px; margin: 20px auto; }
         .lesson-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
         .progress-bar-bg { flex: 1; margin: 0 16px; height: 10px; background: #f1f5f9; border-radius: 5px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: #10b981; width: 25%; transition: width 0.3s; }
+        .progress-bar-fill { height: 100%; background: #10b981; width: 0%; transition: width 0.3s; }
         
+        .question-box { margin-bottom: 20px; }
         .question-box h2 { font-size: 20px; font-weight: 900; color: #1e293b; margin-bottom: 16px; }
         .option-label { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 14px; margin-bottom: 12px; cursor: pointer; background: #fafafa; font-weight: 700; color: #334155; }
         .option-label:hover { border-color: #34d399; background: #f0fdf4; }
@@ -140,7 +141,7 @@
             </div>
         </div>
 
-        <!-- LESSON VIEW -->
+        <!-- LESSON VIEW (MẶC ĐỊNH ẨN) -->
         <div id="view-lesson" class="lesson-container hidden">
             <div class="lesson-header">
                 <button onclick="exitLesson()" style="background:none; border:none; font-weight:700; color:#64748b; cursor:pointer;">✕ Thoát</button>
@@ -151,10 +152,10 @@
             </div>
 
             <div id="lesson-content">
-                <!-- Populated by JS -->
+                <!-- Nội dung câu hỏi sẽ hiển thị ở đây -->
             </div>
 
-            <div class="lesson-footer">
+            <div class="lesson-footer" id="lesson-footer">
                 <button id="check-btn" onclick="checkAnswer()" class="btn-learn">Kiểm tra</button>
             </div>
         </div>
@@ -233,7 +234,7 @@
             }
 
             const q = currentQuestions[currentStep];
-            document.getElementById('lesson-progress-bar').style.width = ((currentStep) / currentQuestions.length) * 100 + '%';
+            document.getElementById('lesson-progress-bar').style.width = ((currentStep + 1) / currentQuestions.length) * 100 + '%';
             document.getElementById('lesson-step-indicator').innerText = (currentStep + 1) + '/' + currentQuestions.length;
             document.getElementById('lesson-footer').style.display = 'flex';
 
@@ -241,7 +242,7 @@
             q.options.forEach((opt, idx) => {
                 opts += `
                     <label class="option-label">
-                        <input type="radio" name="opt" value="${idx}"> ${opt}
+                        <input type="radio" name="opt" value="${idx}"> <span>${opt}</span>
                     </label>
                 `;
             });
@@ -280,7 +281,11 @@
             }
         }
 
-        updateStats();
+        // Tự động khởi tạo trạng thái ban đầu
+        window.onload = function() {
+            updateStats();
+            exitLesson(); // Đảm bảo luôn quay về trang chủ Lộ trình
+        };
     </script>
 </body>
 </html>
